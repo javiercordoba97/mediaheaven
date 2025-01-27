@@ -28,3 +28,9 @@ app.use(userRouter);
 
 app.use("/api/user", apiUser);
 app.use("/api/product",apiProduct);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
+  

@@ -2,18 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "React/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "React/build"
-      }
-    },
-    {
-      "src": "src/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/js/*.js",
+      "src": "src/app.js",
       "use": "@vercel/node"
     }
   ],
@@ -23,8 +12,13 @@
       "dest": "/src/controllers/apis/$1"
     },
     {
+      "src": "/static/(.*)",
+      "dest": "/public/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/React/build/$1"
+      "dest": "/src/app.js"
     }
   ]
 }
+

@@ -20,7 +20,8 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/app.js"
+      "dest": "/app.js",
+      "methods": ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"]
     }
   ]
 }

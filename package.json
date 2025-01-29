@@ -2,11 +2,11 @@
   "name": "mediaheaven",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "app.js",
   "homepage": " https://javiercordoba97.github.io/mediaheaven/",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "build": "echo 'No build step for this project'"
   },
   "keywords": [],

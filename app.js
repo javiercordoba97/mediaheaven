@@ -1,12 +1,12 @@
-const express= require("express");
-const path= require("path");
-const mainRouter = require('./routers/mainRouter');
-const productRouter = require('./routers/productRouter');
-const userRouter = require('./routers/userRouter');
+const express = require("express");
+const path = require("path");
+const mainRouter = require('./src/routers/mainRouter'); // Actualizar la ruta si se mueve app.js
+const productRouter = require('./src/routers/productRouter'); // Actualizar la ruta si se mueve app.js
+const userRouter = require('./src/routers/userRouter'); // Actualizar la ruta si se mueve app.js
 const app = express();
 const methodOverride = require('method-override');
-const apiUser = require("./routers/apis/userRouteApis");
-const apiProduct = require("./routers/apis/productRouteApis");
+const apiUser = require("./src/routers/apis/userRouteApis"); // Actualizar la ruta si se mueve app.js
+const apiProduct = require("./src/routers/apis/productRouteApis"); // Actualizar la ruta si se mueve app.js
 const cookie = require('cookie-parser');
 const session = require('express-session');
 const { Sequelize } = require('sequelize');
@@ -35,9 +35,9 @@ app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookie());
-app.use(session({secret:"secreto", resave: false, saveUninitialize: false}));
+app.use(session({ secret: "secreto", resave: false, saveUninitialize: false }));
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views')); // Actualizar la ruta si se mueve app.js
 app.set('view engine', 'ejs');
 
 app.listen(3000, () => console.log("Server on"));

@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/app.js",
+      "src": "app.js",
       "use": "@vercel/node",
       "config": {
         "nodeVersion": "22.x"
@@ -20,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/src/app.js"
+      "dest": "/app.js"
     }
   ]
 }

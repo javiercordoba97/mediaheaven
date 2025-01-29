@@ -11,6 +11,7 @@ const cookie = require('cookie-parser');
 const session = require('express-session');
 const { Sequelize } = require('sequelize');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // Cargar las variables de entorno desde un archivo .env
 dotenv.config();
@@ -29,7 +30,7 @@ sequelize.authenticate()
   .catch(err => {
     console.error('No se pudo conectar a la base de datos:', err);
   });
-
+app.use(cors())
 app.use(express.static("public"));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));

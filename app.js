@@ -49,8 +49,6 @@ app.use(session({ secret: "secreto", resave: false, saveUninitialize: false }));
 app.set('views', path.join(__dirname, 'src/views')); // Actualizar la ruta si se mueve app.js
 app.set('view engine', 'ejs');
 
-app.listen(3000, () => console.log("Server on"));
-
 app.use(mainRouter);
 app.use(productRouter);
 app.use(userRouter);

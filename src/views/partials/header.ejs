@@ -2,9 +2,13 @@
     <div class="header1">
         <a href="/"><img class="logo" src="/img/Logo.png" alt=""></a>
         <div class="busq">
-            
-            <input class="input" type="text" name="Busqueda" placeholder="Busqueda">
-            <i class="fa fa-search"></i>
+            <!-- Buscador funcional: formulario GET apunta a /search -->
+            <form action="/search" method="get" style="display:flex;">
+                <input class="input" type="text" name="q" placeholder="Busqueda">
+                <button type="submit" style="background:none;border:none;cursor:pointer;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
         </div>
         <div class="burger-menu">
             <i class="fas fa-bars"></i>
@@ -22,9 +26,9 @@
             <div><a href="#">AYUDA</a></div>
         </div>
     </nav>
-        <marquee behavior="scroll" direction="left" scrolldelay="800" scrollamount="100">
-            <div class="pago">
-                <p><i class="fas fa-hand-holding-usd"></i>Compra en cuotas y sin tarjeta de credito </p>   
-            </div>
-        </marquee>    
+    <marquee behavior="scroll" direction="left" scrolldelay="800" scrollamount="100">
+        <div class="pago">
+            <p><i class="fas fa-hand-holding-usd"></i>Compra en cuotas y sin tarjeta de credito </p>   
+        </div>
+    </marquee>    
 </header>

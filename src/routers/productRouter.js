@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
-const cartController = require('../controllers/cartController'); // <-- Importa el controlador de carrito
+const cartController = require('../controllers/cartController');
 const multer = require('multer');
 const path = require('path');
 const storage = multer.diskStorage({
@@ -29,14 +29,17 @@ router.get('/deportesyCarreras', productController.deportes);
 router.get('/estrategia', productController.estrategia);
 router.get('/cooperativos', productController.cooperativos);
 
+// --- BÚSQUEDA DE JUEGOS ---
+router.get('/search', productController.search);
+
 router.post('/creacion', uploadFile.single("imagen"), productController.crearProcess);
 router.put('/edicion/:id', uploadFile.single("imagen"), productController.editarProcess);
 router.delete('/edicion/:id', productController.deleteProcess);
 
 // CARRITO
-router.get('/cart', cartController.cart); // <-- Usa el controlador de carrito
-router.post('/cart/add/:id', cartController.add); // <-- Agregar al carrito
-router.post('/cart/remove/:id', cartController.remove); // <-- Remover del carrito
-router.post('/cart/checkout', cartController.checkout); // <-- Finalizar compra
+router.get('/cart', cartController.cart);
+router.post('/cart/add/:id', cartController.add);
+router.post('/cart/remove/:id', cartController.remove);
+router.post('/cart/checkout', cartController.checkout);
 
 module.exports = router;

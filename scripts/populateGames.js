@@ -10,6 +10,9 @@ async function fetchGames() {
     params: {
       key: RAWG_API_KEY,
       page_size: 15, // Cambia cuántos juegos quieres traer
+    },
+    headers: {
+      'User-Agent': 'Mozilla/5.0'
     }
   });
   return res.data.results;
@@ -19,6 +22,9 @@ async function fetchGameDescription(gameId) {
   const res = await axios.get(`https://api.rawg.io/api/games/${gameId}`, {
     params: {
       key: RAWG_API_KEY
+    },
+    headers: {
+      'User-Agent': 'Mozilla/5.0'
     }
   });
   return res.data.description_raw || 'Sin descripción.'; // RAWG devuelve la descripción sin formato HTML

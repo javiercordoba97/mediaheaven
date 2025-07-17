@@ -1,27 +1,20 @@
-@import "login.css";
-@import "cart.css";
-@import "detalle.css";
-@import "profile.css";
-
-/* ... (todo tu CSS anterior queda igual hasta la sección de buscador) ... */
-
-/*__________________HEADER BUSCADOR______________________*/
+/* BUSCADOR HEADER: sólo este bloque */
 .busq {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
     width: 25%;
     margin-top: 35px;
+    display: flex;
+    align-items: center;
     height: 20%;
+    justify-content: center;
 }
 .busq-form {
     display: flex;
     align-items: center;
     width: 100%;
+    position: relative;
 }
 .input {
-    width: 90%;
+    width: 100%;
     padding: 7px 15px;
     border-radius: 8px;
     border: none;
@@ -30,52 +23,23 @@
     color: #222;
     text-align: center;
     outline: none;
-    transition: box-shadow 0.2s;
-}
-.input:focus {
-    box-shadow: 0 0 0 2px #7fb1d9;
 }
 .search-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.7rem;
-    color: #fff; /* Lupa blanca */
-    margin-left: -40px; /* Ajusta la lupa sobre el borde derecho del input */
+    font-size: 1.4rem;
+    color: #fff !important; /* Lupa blanca */
     z-index: 2;
-    position: relative;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.2s;
 }
 .busq-form .fa-search {
-    color: #fff; /* Lupa blanca */
+    color: #fff !important;
 }
-
-@media (max-width: 900px) {
-    .busq { width: 40%; }
-    .input { font-size: 0.9rem; }
-}
-@media (max-width: 600px) {
-    .busq { width: 65%; }
-    .input { font-size: 0.8rem; }
-    .search-btn { font-size: 1.3rem; }
-}
-
-/*__________________IMAGENES DE PRODUCTOS______________________*/
-/* (Tu sección de imágenes queda igual, pero asegurando que el src sea correcto en el EJS) */
-article img, .product img, .detalle-img {
-    width: 100%;
-    height: auto;
-    max-width: 350px;
-    max-height: 350px;
-    border-radius: 10px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    background: #fff;
-    border-bottom: 1px solid #e5e5e5;
-}
-/* ... el resto de tu CSS se mantiene igual ... */

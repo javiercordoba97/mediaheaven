@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Juego } = require('../models'); // Ajusta el path si tu modelo está en otro lugar
+const { Juego } = require('../src/database/models');// Ajusta el path si tu modelo está en otro lugar
 
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
 const RAWG_API_KEY = 'TU_API_KEY'; // Reemplaza por tu API Key de RAWG

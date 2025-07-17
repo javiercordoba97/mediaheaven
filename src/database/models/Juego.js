@@ -52,9 +52,9 @@ module.exports = (sequelize, dataTypes) => {
     const Juego = sequelize.define(alias, cols, config)
 
     Juego.associate = function(models){
-        Juego.belongsTo(models.generos,{
+        Juego.belongsTo(models.Genero,{
             foreignKey: "id_genero",
-            as: "generos"
+            as: "genero"
         })
     }
 

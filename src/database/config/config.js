@@ -1,9 +1,9 @@
 module.exports = {
   development: {
-    username: 'proyecto2',
-    password: 'proyectodigitalhouse',
-    database: 'proyecto2_digital',
-    host: 'mysql-proyecto2.alwaysdata.net',
+    username: 'jcdata',
+    password: 'Libertad.636', 
+    database: 'jcdata_proyecto2_digital',
+    host: 'mysql-jcdata.alwaysdata.net', 
     dialect: 'mysql'
   },
   test: {

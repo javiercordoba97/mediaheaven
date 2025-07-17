@@ -18,10 +18,9 @@ const userController = {
             });
         }
 
-        console.log(req.body);
         let usuarioNuevo = await usuario.create({
             "id": Date.now() + Math.round(Math.random() * 1E9),
-            "foto": req.file ? req.file.filename : "defaultUsers.png",
+            "img": req.file ? req.file.filename : "defaultUsers.png",
             "nombre": req.body.name,
             "apellido": req.body.last_name,
             "email": req.body.email,
@@ -71,19 +70,24 @@ const userController = {
         res.render('users/edicionUsuario', { usuario: usuarioEncontrado });
     },
     editarUsuario: async (req, res) => {
-        let usuarioEncontrado = await usuario.update({
+        let updateObj = {
             "img": req.file ? req.file.filename : "defaultUsers.png",
-            "nombre": req.body.nombre,
-            "apellido": req.body.apellido,
+            "nombre": req.body.name,
+            "apellido": req.body.last_name,
             "email": req.body.email,
             "telefono": req.body.telefono,
             "borrado": false
-        }, { where: { id: req.params.id } });
+        };
+        // Opcionalmente actualizar la contraseña si se envió
+        if (req.body.password) {
+            updateObj.contraseña = bcrypt.hashSync(req.body.password, 10);
+        }
+        await usuario.update(updateObj, { where: { id: req.params.id } });
 
         res.redirect('/profile/' + req.params.id);
     },
     deleteUsuario: async (req, res) => {
-        const usuarioEliminado = await usuario.destroy({ where: { id: req.params.id } });
+        await usuario.destroy({ where: { id: req.params.id } });
         res.redirect('/');
     }
 };

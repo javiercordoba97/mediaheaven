@@ -36,6 +36,8 @@ function getRandomPrice() {
 }
 
 async function saveGamesToDB(games) {
+  const juegosGuardados = new Set();
+
   for (const game of games) {
     let descripcion = '';
     try {
@@ -44,12 +46,19 @@ async function saveGamesToDB(games) {
       descripcion = 'Sin descripción.';
     }
 
-    // Evitar duplicados por nombre y fecha
+    // Evitar duplicados solo por nombre (más seguro)
+    const nombreKey = game.name.trim().toLowerCase();
+    if (juegosGuardados.has(nombreKey)) {
+      console.log(`Juego duplicado en fetch, no se carga: ${game.name}`);
+      continue;
+    }
+
     const existente = await Juego.findOne({
-      where: { nombre: game.name, fecha: game.released }
+      where: { nombre: game.name }
     });
     if (existente) {
-      console.log(`Juego duplicado, no se carga: ${game.name}`);
+      console.log(`Juego duplicado en base de datos, no se carga: ${game.name}`);
+      juegosGuardados.add(nombreKey);
       continue;
     }
 
@@ -74,6 +83,7 @@ async function saveGamesToDB(games) {
       id_genero: idGenero,
       stock: true
     });
+    juegosGuardados.add(nombreKey);
     console.log(`Cargado: ${game.name} - Género: ${generoNombre} (id: ${idGenero})`);
   }
 }

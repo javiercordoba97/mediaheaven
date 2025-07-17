@@ -45,7 +45,7 @@ Media Heaven es un e-commerce especializado en la venta de videojuegos. La plata
 
 ## Uso
 
-- Accede a la web en `http://localhost:3000` para comenzar a explorar el catálogo de videojuegos y realizar compras.
+- Accede a la web en `https://mediaheaven.vercel.app/` para comenzar a explorar el catálogo de videojuegos y realizar compras.
 
 ## Contribuciones
 

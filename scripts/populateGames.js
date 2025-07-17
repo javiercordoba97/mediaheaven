@@ -5,7 +5,7 @@ const { Juego, Genero } = require('../src/database/models');
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
 const RAWG_API_KEY = process.env.RAWG_API_KEY;
 
-const TOTAL_JUEGOS = 100; // Cambia este valor para traer la cantidad que quieras
+const TOTAL_JUEGOS = 300; // Cambia este valor para traer la cantidad que quieras
 const PAGE_SIZE = 20;
 
 async function fetchGames() {

@@ -1,15 +1,14 @@
 <header>
     <div class="header1">
         <a href="/"><img class="logo" src="/img/Logo.png" alt=""></a>
-        <div class="busq">
-            <!-- Buscador funcional: formulario GET apunta a /search -->
-            <form action="/search" method="get" style="display:flex;">
-                <input class="input" type="text" name="q" placeholder="Busqueda">
-                <button type="submit" style="background:none;border:none;cursor:pointer;">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
+<div class="busq">
+    <form action="/search" method="get" class="busq-form">
+        <input class="input" type="text" name="q" placeholder="Busqueda">
+        <button type="submit" class="search-btn">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</div>
         <div class="burger-menu">
             <i class="fas fa-bars"></i>
         </div>

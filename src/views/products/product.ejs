@@ -9,7 +9,8 @@
 
             <main class="detalle">
                 <div class="juego">
-                    <img src="<%= productoEncontrado.imagen %>" alt="">
+                    <!-- AGREGA LA CLASE 'detalle-img' PARA ESTILOS ESPECÍFICOS -->
+                    <img src="<%= productoEncontrado.imagen %>" alt="" class="detalle-img">
                     <div class="descripcion">
                         <ul>
                             <li>
@@ -27,7 +28,12 @@
                                 </li>
                             </div>
                             <div class="datosJuego">
-                                <li><button class="botonDeCompra">Agregar al Carrito</button></li>
+                                <!-- BOTÓN AGREGAR AL CARRITO – MODIFICADO -->
+                                <li>
+                                    <form action="/cart/add/<%= productoEncontrado.id %>" method="POST" style="display:inline;">
+                                        <button class="botonDeCompra" type="submit">Agregar al Carrito</button>
+                                    </form>
+                                </li>
                             </div>
                             <a href="/products/edicion/<%= productoEncontrado.id %>">
                                 <li><button class="botonDeEdicion">Editar Producto</button></li>
@@ -35,10 +41,6 @@
                             <form action="/edicion/<%=productoEncontrado.id%>?_method=Delete" method="post">
                                 <li><button class="delete" type="submit">Eliminar Producto</button></li>
                             </form>
-                            
-                            <%//<a href='/restauracion/'>Restaurar Producto</a>  %>
-                            
-
                         </ul>
                     </div>
                 </div>
@@ -50,5 +52,4 @@
             <%- include("../partials/footer") %>
 
     </body>
-
 </html>

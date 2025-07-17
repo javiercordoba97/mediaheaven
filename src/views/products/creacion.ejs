@@ -9,22 +9,21 @@
       <main class="login">
         <div class="login-container">
           <h1>CARGAR JUEGO</h1>
-          <form class= form id="product-form" action="/creacion" method="POST" enctype="multipart/form-data">
-            <ul class= "err" for="err"></ul>
+          <form class="form" id="product-form" action="/creacion" method="POST" enctype="multipart/form-data">
+            <ul class="err" for="err"></ul>
+            
             <label for="titulo">Nombre del Juego</label>
             <input type="text" id="titulo" name="titulo">
 
-
             <label for="imagen">Imagen</label>
-            <input type="file" id="imagen" name="imagen" accept="image">
-
+            <!-- Corrige accept para solo imágenes y el input -->
+            <input type="file" id="imagen" name="imagen" accept="image/*">
 
             <label for="precio">Precio</label>
-            <input type="number" id="precio" name="precio" >
+            <input type="number" id="precio" name="precio">
 
-            
             <label for="categoria">Seleciona la categoria</label>
-            <select id="categoria" name="categoria" >
+            <select id="categoria" name="categoria">
               <option value="1">Aventuras</option>
               <option value="2">Acción</option>
               <option value="3">Juego de MMO</option>
@@ -34,23 +33,20 @@
             </select>
 
             <label for="estreno">Fecha de lanzamiento</label>
-            <input type="date" id="estreno" name="estreno" >
+            <input type="date" id="estreno" name="estreno">
 
             <label for="rating">Rating</label>
-            <input type="number" id="rating" name="rating" >
+            <input type="number" id="rating" name="rating">
 
             <label for="descripcion">Descripción</label>
-            <input id="descripcion" name="descripcion" >
+            <input id="descripcion" name="descripcion">
 
             <button type="submit">Crear</button>
           </form>
         </div>
         <script src="/js/creacionValidation.js"></script>
-
-</html>
-</main>
-
-<%- include("../partials/footer") %>
+      </main>
+    <%- include("../partials/footer") %>
   </body>
 
-  </html>
+</html>

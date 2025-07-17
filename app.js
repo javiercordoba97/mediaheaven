@@ -15,8 +15,8 @@ const cors = require('cors');
 const { METHODS } = require("http");
 const corsConfig = {
   origin: '*',
-  Credential: true,
-  METHODS: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true, // <-- CORRECCIÓN: debe ser "credentials" y en minúsculas
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // <-- CORRECCIÓN: "methods" y en minúsculas
 }
 
 // Cargar las variables de entorno desde un archivo .env
@@ -37,14 +37,20 @@ sequelize.authenticate()
     console.error('No se pudo conectar a la base de datos:', err);
   });
 
-  app.options("", cors(corsConfig));
+app.options("*", cors(corsConfig)); // <-- CORRECCIÓN: "*" para todas las rutas
 app.use(cors(corsConfig))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookie());
-app.use(session({ secret: "secreto", resave: false, saveUninitialize: false }));
+// ---- CORRECCIÓN DE LA SESIÓN ----
+app.use(session({
+  secret: "secreto",
+  resave: false,
+  saveUninitialized: true, // <-- CORRECCIÓN: debe ser "saveUninitialized"
+  cookie: { secure: false } // <-- secure: false para desarrollo/local
+}));
 
 app.set('views', path.join(__dirname, 'src/views')); // Actualizar la ruta si se mueve app.js
 app.set('view engine', 'ejs');

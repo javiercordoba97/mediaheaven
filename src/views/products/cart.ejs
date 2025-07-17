@@ -8,39 +8,44 @@
   <%- include("../partials/header") %> 
   <main class="cart">
     <section id="cart-items">
-      <div class="cart-item">
-        <img src="/img/products/horizon.jpg" alt="Item 1">
-        <div class="item-details">
-          <h3>Horizon: Zero Dawn</h3>
-          <p>¡Comprando con el 30% OFF estas ahorrando $2.700!</p>
-          <span class="item-price">$6.300</span>
-        </div>
-        <button class="remove-button">Remover</button>
-      </div>
-      <div class="cart-item">
-        <img src="/img/products/witcher.jpg" alt="Item 1">
-        <div class="item-details">
-          <h3>The Witcher 3: Wild Hunt</h3>
-          <p>¡Comprando con el 30% OFF estas ahorrando $5.100!</p>
-          <span class="item-price">$11.900</span>
-        </div>
-        <button class="remove-button">Remover</button>
-      </div>
+      <% if (cart && cart.length > 0) { %>
+        <% cart.forEach((item, idx) => { %>
+          <div class="cart-item" data-id="<%= item.id %>">
+            <img src="<%= item.imagen %>" alt="<%= item.nombre %>">
+            <div class="item-details">
+              <h3><%= item.nombre %></h3>
+              <% if (item.descuento && item.descuento > 0) { 
+                const descuentoValor = Math.round(item.precio * item.descuento / 100); 
+              %>
+                <p>¡Comprando con el <%= item.descuento %>% OFF estas ahorrando $<%= descuentoValor %>!</p>
+              <% } %>
+              <span class="item-price">$<%= item.precio %></span>
+            </div>
+            <form action="/cart/remove/<%= item.id %>" method="POST" style="display:inline;">
+              <button class="remove-button" type="submit">Remover</button>
+            </form>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="empty-cart">No tienes juegos en tu carrito.</p>
+      <% } %>
     </section>
     <div class="total">
       <div id="cart-total">
         <h2>Total:</h2>
-        <span id="total-amount">$28.040</span>
-        <button class="comprar">Comprar</button>
+        <span id="total-amount">
+          $<%= (cart && cart.length > 0) ? cart.reduce((acc, item) => acc + item.precio, 0) : 0 %>
+        </span>
+        <% if (cart && cart.length > 0) { %>
+          <form action="/cart/checkout" method="POST" style="display:inline;">
+            <button class="comprar" type="submit">Comprar</button>
+          </form>
+        <% } %>
       </div>
     </div>
-    
   </main>
-  <script src="cart.js"></script>
+  <script src="/js/cart.js"></script>
   <%- include("../partials/footer") %> 
 </body>
 
 </html>
-
-
-

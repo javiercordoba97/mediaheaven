@@ -14,20 +14,27 @@
             <label for="nombre">Nombre del producto:</label>
             <input value="<%=productoEncontrado.nombre%>"  id="nombre" name="nombre">
 
-            <label for="imagen">Imagen:</label>
-            <input value="<%=productoEncontrado.image%>" type="file" id="imagen" name="imagen" accept="image">
+            <!-- Muestra la imagen actual del producto para referencia -->
+            <% if (productoEncontrado.imagen) { %>
+              <div style="margin: 16px 0;">
+                <img src="<%= productoEncontrado.imagen %>" alt="Imagen actual" class="producto-img" style="max-width: 220px; max-height: 220px; display:block; margin:0 auto;">
+              </div>
+            <% } %>
+
+            <label for="imagen">Imagen (sube una nueva para reemplazar):</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
 
             <label for="precio">Precio:</label>
             <input value="<%=productoEncontrado.precio%>" type="number" id="precio" name="precio" required>
 
             <label for="categoria">Seleciona la categoria</label>
-            <select value="<%=productoEncontrado.categoria%>" id="categoria" name="categoria" required>
-              <option value="1">Aventuras</option>
-              <option value="2">Acción</option>
-              <option value="3">Juego de MMO</option>
-              <option value="4">Estrategia</option>
-              <option value="5">Coopertativos</option>
-              <option value="6">Deportes y Carreras</option>
+            <select id="categoria" name="categoria" required>
+              <option value="1" <%= productoEncontrado.categoria == 1 ? "selected" : "" %>>Aventuras</option>
+              <option value="2" <%= productoEncontrado.categoria == 2 ? "selected" : "" %>>Acción</option>
+              <option value="3" <%= productoEncontrado.categoria == 3 ? "selected" : "" %>>Juego de MMO</option>
+              <option value="4" <%= productoEncontrado.categoria == 4 ? "selected" : "" %>>Estrategia</option>
+              <option value="5" <%= productoEncontrado.categoria == 5 ? "selected" : "" %>>Coopertativos</option>
+              <option value="6" <%= productoEncontrado.categoria == 6 ? "selected" : "" %>>Deportes y Carreras</option>
             </select>
 
             <label for="estreno">Fecha de lanzamiento</label>

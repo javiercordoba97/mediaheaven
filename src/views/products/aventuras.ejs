@@ -29,7 +29,8 @@
                         <% productos.forEach((p)=>{%>
                             <article class="product">
                                 <a href="/product/<%= p.id %>">
-                                    <img src="<%= p.imagen %>" alt="">
+                                    <!-- Agregada la clase producto-img para control CSS -->
+                                    <img src="<%= p.imagen %>" alt="<%= p.nombre %>" class="producto-img">
                                     <div class="product-info"><i class="fas fa-truck"></i>
                                         <p class="precio"> $ <%= p.precio %>
                                         </p>
@@ -42,7 +43,7 @@
                                     </div>
                                 </a>
                             </article>
-                            <%})%>
+                        <%})%>
                     </div>
                 </div>
             </section>

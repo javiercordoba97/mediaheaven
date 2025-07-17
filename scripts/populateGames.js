@@ -1,8 +1,9 @@
+require('dotenv').config();
 const axios = require('axios');
-const { Juego } = require('../src/database/models');// Ajusta el path si tu modelo está en otro lugar
+const { Juego } = require('../src/database/models'); // Ajusta el path si tu modelo está en otro lugar
 
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
-const RAWG_API_KEY = 'TU_API_KEY'; // Reemplaza por tu API Key de RAWG
+const RAWG_API_KEY = process.env.RAWG_API_KEY; // Lee la API Key desde .env
 
 async function fetchGames() {
   const res = await axios.get(RAWG_API_URL, {
@@ -20,7 +21,7 @@ async function fetchGameDescription(gameId) {
       key: RAWG_API_KEY
     }
   });
-  return res.data.description_raw; // RAWG devuelve la descripción sin formato HTML
+  return res.data.description_raw || 'Sin descripción.'; // RAWG devuelve la descripción sin formato HTML
 }
 
 function getRandomPrice() {

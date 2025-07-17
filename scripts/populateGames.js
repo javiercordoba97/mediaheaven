@@ -1,31 +1,32 @@
 require('dotenv').config();
 const axios = require('axios');
-const { Juego, Genero } = require('../src/database/models'); // Importa ambos modelos
+const { Juego, Genero } = require('../src/database/models');
 
 const RAWG_API_URL = 'https://api.rawg.io/api/games';
-const RAWG_API_KEY = process.env.RAWG_API_KEY; // Lee la API Key desde .env
+const RAWG_API_KEY = process.env.RAWG_API_KEY;
+
+const TOTAL_JUEGOS = 100; // Cambia este valor para traer la cantidad que quieras
+const PAGE_SIZE = 20;
 
 async function fetchGames() {
-  const res = await axios.get(RAWG_API_URL, {
-    params: {
-      key: RAWG_API_KEY,
-      page_size: 15,
-    },
-    headers: {
-      'User-Agent': 'Mozilla/5.0'
-    }
-  });
-  return res.data.results;
+  let todos = [];
+  let page = 1;
+  while (todos.length < TOTAL_JUEGOS) {
+    const res = await axios.get(RAWG_API_URL, {
+      params: { key: RAWG_API_KEY, page_size: PAGE_SIZE, page },
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    });
+    todos = todos.concat(res.data.results);
+    if (res.data.results.length < PAGE_SIZE) break;
+    page++;
+  }
+  return todos.slice(0, TOTAL_JUEGOS);
 }
 
 async function fetchGameDescription(gameId) {
   const res = await axios.get(`https://api.rawg.io/api/games/${gameId}`, {
-    params: {
-      key: RAWG_API_KEY
-    },
-    headers: {
-      'User-Agent': 'Mozilla/5.0'
-    }
+    params: { key: RAWG_API_KEY },
+    headers: { 'User-Agent': 'Mozilla/5.0' }
   });
   return res.data.description_raw || 'Sin descripción.';
 }
@@ -43,13 +44,20 @@ async function saveGamesToDB(games) {
       descripcion = 'Sin descripción.';
     }
 
-    // Obtener el género principal
+    // Evitar duplicados por nombre y fecha
+    const existente = await Juego.findOne({
+      where: { nombre: game.name, fecha: game.released }
+    });
+    if (existente) {
+      console.log(`Juego duplicado, no se carga: ${game.name}`);
+      continue;
+    }
+
+    // Obtener género principal
     let idGenero = null;
     let generoNombre = game.genres.length ? game.genres[0].name : null;
     if (generoNombre) {
-      // Busca si el género existe en la tabla generos
       let genero = await Genero.findOne({ where: { nombre: generoNombre } });
-      // Si no existe, lo crea
       if (!genero) {
         genero = await Genero.create({ nombre: generoNombre });
       }
